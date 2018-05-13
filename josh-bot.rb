@@ -19,7 +19,8 @@ class JoshTheBot
     )
 
     @bot.message(with_text: 'Ping!') do |event|
-      event.respond('Pong!')
+      m = event.respond('Pong!')
+      m.edit "Pong! Time taken: #{Time.now - event.timestamp} seconds."
     end
 
     @bot.message(with_text: 'NOICE') do |event|
@@ -34,7 +35,7 @@ class JoshTheBot
       # This is a check that only allows a user with a specific ID to execute this command. Otherwise, everyone would be
       # able to shut your bot down whenever they wanted.
       break unless event.user.id == CONFIG["USER_ID"]
-      bot.send_message(event.channel.id, 'Bot is shutting down')
+      @bot.send_message(event.channel.id, 'Bot is shutting down')
       exit
     end
   end
@@ -42,7 +43,7 @@ class JoshTheBot
   def run
     @bot.run(:async)
     # Sends a message to the bot channel on start up
-    # @bot.send_message(CONFIG["BOT_CHANNEL_ID"], 'Bot is now running!') 
+    @bot.send_message(CONFIG["BOT_CHANNEL_ID"], 'Bot is now running!') 
     @bot.sync()
   end
 
@@ -104,11 +105,10 @@ class JoshTheBot
   end
 
   def get_color(color)
-    color.length > 1 ? @colors["multi"] : @colors[color]
+    color.length > 1 ? @colors["multi"] : @colors[color[0]]
   end
 
   def get_title(name, mana_cost)
-    emoji_array = Manamoji.get_emoji(mana_cost)
-    name + " " + emoji_array.map! {|e| @bot.find_emoji(e).to_s}.join(" ")
+    name + "\t" + Manamoji.get_emoji(mana_cost).map! {|e| @bot.find_emoji(e).to_s}.join(" ")
   end
 end
