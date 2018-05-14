@@ -94,12 +94,6 @@ class JoshTheBot
       embed.title = get_title(body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
       embed.description = get_card_text(body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
-      # embed.description = body["type_line"] + "\n" + body["oracle_text"]
-      # if body["power"]
-      #   embed.description += "\n" + body["power"] + "/" + body["toughness"]
-      # elsif body["loyalty"]
-      #   embed.description += "\n" + body["loyalty"]
-      # end
       embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["image_uris"]["normal"])
       embed.color = get_color(body["colors"])
     end
@@ -110,35 +104,27 @@ class JoshTheBot
   end
 
   def get_title(name, mana_cost)
-    name + "\t" + Manamoji.get_emoji(mana_cost).map! {|e| @bot.find_emoji(e).to_s}.join(" ")
+    name + "   " + Manamoji.get_emoji(mana_cost).map! {|e| @bot.find_emoji(e).to_s}.join("")
   end
 
   def get_card_text(type_line, oracle_text, power = nil, toughness = nil, loyalty = nil)
     description = type_line + "\n"
-
     text_array = oracle_text.split(/\{(.{1,3})\}/)
-    text_box = ""
     is_emoji = false
-
     text_array.each do |possible_emoji|
       if is_emoji
-        text_box += @bot.find_emoji(Manamoji.get_emoji(possible_emoji)[0]).to_s # Manamoji.get_emoji(possible_emoji).map! {|e| @bot.find_emoji(e)}.join("")
+        description += @bot.find_emoji(Manamoji.get_emoji(possible_emoji)[0]).to_s
         is_emoji = false
       else
-        text_box += possible_emoji
+        description += possible_emoji
         is_emoji = true
       end
     end
-
-    description += text_box
-
     if power
       description += "\n" + power + "/" + toughness
     elsif loyalty
       description += "\n" + loyalty
     end
-
     return description
-
   end
 end
