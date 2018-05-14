@@ -8,7 +8,7 @@ class JoshTheBot
   include Manamoji
 
   def initialize
-    @colors = {"multi" => 14799002, "W" => 16579807, "U" => 9622767, "B" => 13484735, "R" => 16754056, "G" => 8772015}
+    @colors = {"multi" => 14799002, "W" => 16579807, "U" => 9622767, "B" => 0, "R" => 16754056, "G" => 8772015}
     @colors.default = 13550272
 
     @bot = Discordrb::Commands::CommandBot.new(
