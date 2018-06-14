@@ -1,5 +1,6 @@
 require 'discordrb'
 require 'yaml'
+require 'rufus-scheduler'
 require_relative './modules/magic_symbol_parser'
 
 class JoshTheBot
@@ -17,6 +18,12 @@ class JoshTheBot
       token: CONFIG["DISCORD_TOKEN"], 
       prefix: '!'
     )
+
+    @scheduler = Rufus::Scheduler.new
+
+    @scheduler.cron '30 18 * * *' do
+      @bot.send_message(CONFIG["BOT_CHANNEL_ID"], 'My scheduler is working!')
+    end
 
     @bot.message(with_text: 'Ping!') do |event|
       m = event.respond('Pong!')
