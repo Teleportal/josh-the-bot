@@ -21,8 +21,8 @@ class JoshTheBot
 
     @scheduler = Rufus::Scheduler.new
 
-    @scheduler.cron '30 18 * * *' do
-      @bot.send_message(CONFIG["BOT_CHANNEL_ID"], 'My scheduler is working!')
+    @scheduler.cron '0 9,21 * * *' do
+      @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
     end
 
     @bot.message(with_text: 'Ping!') do |event|
@@ -67,7 +67,7 @@ class JoshTheBot
 
   def get_card_price(event, body)
     event.channel.send_embed do |embed|
-      embed.title = get_title(body["name"], body["mana_cost"])
+      embed.title = get_title(event, body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
       embed.description = "$" + body["usd"]
       embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["image_uris"]["normal"])
@@ -77,7 +77,7 @@ class JoshTheBot
 
   def get_card_image(event, body)
     event.channel.send_embed do |embed|
-      embed.title = get_title(body["name"], body["mana_cost"])
+      embed.title = get_title(event, body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
       embed.image = Discordrb::Webhooks::EmbedImage.new(url: body["image_uris"]["normal"])
       embed.color = get_color(body["colors"])
@@ -86,7 +86,7 @@ class JoshTheBot
 
   def get_card_legalities(event, body)
     event.channel.send_embed do |embed|
-      embed.title = get_title(body["name"], body["mana_cost"])
+      embed.title = get_title(event, body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
       body["legalities"].each do |magic_format, legalese|
         legality = (legalese == "not_legal" ? "Not Legal" : legalese.capitalize)
@@ -98,9 +98,9 @@ class JoshTheBot
 
   def get_card(event, body)
     event.channel.send_embed do |embed|
-      embed.title = get_title(body["name"], body["mana_cost"])
+      embed.title = get_title(event, body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
-      embed.description = get_card_text(body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
+      embed.description = get_card_text(event, body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
       embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["image_uris"]["normal"])
       embed.color = get_color(body["colors"])
     end
@@ -110,23 +110,32 @@ class JoshTheBot
     color.length > 1 ? @colors["multi"] : @colors[color[0]]
   end
 
-  def get_title(name, mana_cost)
-    name + "   " + Manamoji.get_emoji(mana_cost).map! {|e| @bot.find_emoji(e).to_s}.join("")
+  def get_title(event, name, mana_cost)
+    if event.server == CONFIG["PADSWAY_ID"]
+      name + "   " + Manamoji.get_emoji(mana_cost).map! {|e| @bot.find_emoji(e).to_s}.join("")
+    else
+      name + "   " + mana_cost
+    end
   end
 
-  def get_card_text(type_line, oracle_text, power = nil, toughness = nil, loyalty = nil)
+  def get_card_text(event, type_line, oracle_text, power = nil, toughness = nil, loyalty = nil)
     description = type_line + "\n"
-    text_array = oracle_text.split(/\{(.{1,3})\}/)
-    is_emoji = false
-    text_array.each do |possible_emoji|
-      if is_emoji
-        description += @bot.find_emoji(Manamoji.get_emoji(possible_emoji)[0]).to_s
-        is_emoji = false
-      else
-        description += possible_emoji
-        is_emoji = true
+    if event.server == CONFIG["PADSWAY_ID"]
+      text_array = oracle_text.split(/\{(.{1,3})\}/)
+      is_emoji = false
+      text_array.each do |possible_emoji|
+        if is_emoji
+          description += @bot.find_emoji(Manamoji.get_emoji(possible_emoji)[0]).to_s
+          is_emoji = false
+        else
+          description += possible_emoji
+          is_emoji = true
+        end
       end
+    else
+      description += oracle_text
     end
+    
     if power
       description += "\n" + power + "/" + toughness
     elsif loyalty
