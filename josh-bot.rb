@@ -16,12 +16,12 @@ class JoshTheBot
       log_mode: :normal,
       fancy_log: true,
       token: CONFIG["DISCORD_TOKEN"], 
-      prefix: '!'
+      prefix: '~'
     )
 
     @scheduler = Rufus::Scheduler.new
 
-    @scheduler.cron '0 9,21 * * *' do
+    @scheduler.cron '0 0,12 * * *' do
       @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
     end
 
