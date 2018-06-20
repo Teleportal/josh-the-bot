@@ -39,7 +39,16 @@ class JoshTheBot
     end
 
     @bot.command(:help, help_available: false) do |event|
-      @bot.send_message(event.channel.id, "Here's what I can do: \n!help: That's the command you used to get me to say this, it brings up the available commands! \nPing!: Saying this will make me say 'Pong!', plus how long it took me to respond! \nNOICE: ALSO NOICE \nMagic Card Commands: By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes: \n!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in) \nIf you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky.")
+      event.channel.send_embed do |embed|
+        embed.title = "Here's what I can do"
+        embed.add_field(name: "~help", value: "That's the command you used to get me to say this, it brings up the available commands!")
+        embed.add_field(name: "Ping!", value: "Saying this will make me say 'Pong!', plus how long it took me to respond!")
+        embed.add_field(name: "NOICE", value: "ALSO NOICE")
+        embed.add_field(name: "Magic Card Commands", value: "By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
+        embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
+        embed.description = "If you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky."
+      end
+      # @bot.send_message(event.channel.id, "Here's what I can do: \n!help: That's the command you used to get me to say this, it brings up the available commands! \nPing!: Saying this will make me say 'Pong!', plus how long it took me to respond! \nNOICE: ALSO NOICE \nMagic Card Commands: By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes: \n!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in) \nIf you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky.")
     end
 
     @bot.command(:exit, help_available: false) do |event|
