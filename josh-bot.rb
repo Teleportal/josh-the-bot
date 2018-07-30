@@ -24,7 +24,7 @@ class JoshTheBot
     @scheduler.cron '0 0,12 * * *' do
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
       m.react("\u1F95B")
-      # m.react(🥛)
+      m.react(💤)
     end
 
     @bot.message(with_text: 'Ping!') do |event|
@@ -46,8 +46,8 @@ class JoshTheBot
       end
     end
 
-    @bot.message(contains: /I love you,? [Jj]osh-?[Bb]ot/) do |event|
-      event.message.react("\u2764")
+    @bot.message(contains: /[Ii] love you,? [Jj]osh-?[Bb]ot/) do |event|
+      event.message.react("\u1f49c")
       event.respond('I love you too!')
     end
 
