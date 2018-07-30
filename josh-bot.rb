@@ -56,7 +56,7 @@ class JoshTheBot
         setup_event.respond("#{setup_event.message}, who?")
       end
       event.user.await(:punchline) do |punchline_event|
-        punchline_event.react("\u1f44f")
+        punchline_event.message.react("\u1f44f")
       end
     end
 
