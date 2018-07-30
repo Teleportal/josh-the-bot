@@ -23,7 +23,7 @@ class JoshTheBot
 
     @scheduler.cron '0 0,12 * * *' do
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
-      m.react("\u1F95B") # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+      m.react("\u1F95B")
       # m.react(🥛)
     end
 
@@ -38,19 +38,19 @@ class JoshTheBot
 
     @bot.message(with_text: '...noice?') do |event|
       event.respond('...noice!')
-    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    end
 
     @bot.message(contains: /[Mm]y [Ii]diot [Ss]on/) do |event|
       if event.user.id == CONFIG["USER_ID"]
         event.respond('I love you too, my idiot father.')
       end
-    end #DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    end
 
     @bot.message(contains: /I love you,? [Jj]osh-?[Bb]ot/) do |event|
       event.respond('I love you too!')
-    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    end
 
-    @bot.message(contains: /[Kk]nock [Kk]nock/) do |event|
+    @bot.message(with_text: /[Kk]nock,? [Kk]nock/) do |event|
       event.respond("Who's there?")
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
@@ -66,7 +66,7 @@ class JoshTheBot
 
     @bot.command(:badjoke, help_available: false) do |event|
       event.respond('https://www.youtube.com/watch?v=bcYppAs6ZdI')
-    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    end
 
     @bot.command(:item, help_available: false) do |event|
       num = rand(1..100)
@@ -78,7 +78,7 @@ class JoshTheBot
 
     @bot.command(:dragon, help_available: false) do |event|
       
-    end
+    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:help, help_available: false) do |event|
       event.channel.send_embed do |embed|
@@ -86,6 +86,12 @@ class JoshTheBot
         embed.add_field(name: "~help", value: "That's the command you used to get me to say this, it brings up the available commands!")
         embed.add_field(name: "Ping!", value: "Saying this will make me say 'Pong!', plus how long it took me to respond!")
         embed.add_field(name: "NOICE", value: "ALSO NOICE")
+        embed.add_field(name: "My Idiot Son", value: "This isn't really a command, I just respond when my father calls me by his chosen nickname.")
+        embed.add_field(name: "I love you, Joshbot!", value: "I love you too!")
+        embed.add_field(name: "~badjoke", value: "I link to the badum tish sound!")
+        embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
+        embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
+        embed.add_field(name: "~dragon", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "Magic Card Commands", value: "By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
         embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
         embed.description = "If you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky."
