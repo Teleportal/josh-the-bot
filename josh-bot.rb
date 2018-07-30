@@ -47,6 +47,7 @@ class JoshTheBot
     end
 
     @bot.message(contains: /I love you,? [Jj]osh-?[Bb]ot/) do |event|
+      event.message.react("\u2764")
       event.respond('I love you too!')
     end
 
@@ -55,9 +56,9 @@ class JoshTheBot
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
       end
-      event.user.await(:punchline) do |punchline_event|
-        punchline_event.message.react("\u1f44f")
-      end
+      # event.user.await(:punchline) do |punchline_event|
+      #   punchline_event.message.react("\u1f44f")
+      # end
     end
 
     @bot.message(contains: /\[\[.+\]\]/) do |event|
