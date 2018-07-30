@@ -22,7 +22,9 @@ class JoshTheBot
     @scheduler = Rufus::Scheduler.new
 
     @scheduler.cron '0 0,12 * * *' do
-      @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
+      m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
+      m.react("\u1F95B") # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+      # m.react(🥛)
     end
 
     @bot.message(with_text: 'Ping!') do |event|
@@ -34,8 +36,48 @@ class JoshTheBot
       event.respond('ALSO NOICE')
     end
 
+    @bot.message(with_text: '...noice?') do |event|
+      event.respond('...noice!')
+    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.message(contains: /[Mm]y [Ii]diot [Ss]on/) do |event|
+      if event.user.id == CONFIG["USER_ID"]
+        event.respond('I love you too, my idiot father.')
+      end
+    end #DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.message(contains: /I love you,? [Jj]osh-?[Bb]ot/) do |event|
+      event.respond('I love you too!')
+    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.message(contains: /[Kk]nock [Kk]nock/) do |event|
+      event.respond("Who's there?")
+      event.user.await(:setup) do |setup_event|
+        setup_event.respond("#{setup_event.message}, who?")
+        setup_event.user.await(:punchline) do |punchline_event|
+          punchline_event.react("\u1f44f")
+        end
+      end
+    end
+
     @bot.message(contains: /\[\[.+\]\]/) do |event|
       get_scryfall(event)
+    end
+
+    @bot.command(:badjoke, help_available: false) do |event|
+      event.respond('https://www.youtube.com/watch?v=bcYppAs6ZdI')
+    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.command(:item, help_available: false) do |event|
+      num = rand(1..100)
+    end #  DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.command(:npc, help_available: false) do |event|
+      num = rand(1..100)
+    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.command(:dragon, help_available: false) do |event|
+      
     end
 
     @bot.command(:help, help_available: false) do |event|
