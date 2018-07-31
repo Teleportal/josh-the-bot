@@ -25,6 +25,7 @@ class JoshTheBot
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
       m.react("\u{1F95B}")
       m.react("💤")
+      m.react("💊")
     end
 
     @bot.message(with_text: "emoji test") do |event|
@@ -55,7 +56,7 @@ class JoshTheBot
       event.respond('I love you too!')
     end
 
-    @bot.message(with_text: /[Kk]nock,? [Kk]nock/) do |event|
+    @bot.message(with_text: /[Kk]nock,? [Kk]nock(.!)*/) do |event|
       event.respond("Who's there?")
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
@@ -96,6 +97,7 @@ class JoshTheBot
         embed.add_field(name: "NOICE", value: "ALSO NOICE")
         embed.add_field(name: "My Idiot Son", value: "This isn't really a command, I just respond when my father calls me by his chosen nickname.")
         embed.add_field(name: "I love you, Joshbot!", value: "I love you too!")
+        embed.add_field(name: "Knock knock")
         embed.add_field(name: "~badjoke", value: "I link to the badum tish sound!")
         embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
