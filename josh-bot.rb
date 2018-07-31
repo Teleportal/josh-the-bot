@@ -58,12 +58,15 @@ class JoshTheBot
 
     @bot.message(with_text: /[Kk]nock,? [Kk]nock[.!]*/) do |event|
       event.respond("Who's there?")
+      counter = 0
       event.user.await(:setup) do |setup_event|
-        setup_event.respond("#{setup_event.message}, who?")
-        event.user.await(:punchline) do |punchline_event|
-          punchline_event.message.react("\u{1f44f}")
-        end
-        false
+        if counter == 0
+          setup_event.respond("#{setup_event.message}, who?")
+          counter += 1
+          false
+        else
+          setup_event.message.react("\u{1f44f}")
+          nil
       end
     end
 
