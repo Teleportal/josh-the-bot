@@ -27,6 +27,10 @@ class JoshTheBot
       m.react(💤)
     end
 
+    @bot.message(with_text: "emoji test") do |event|
+      event.message.react("\u{1f49c}")
+    end
+
     @bot.message(with_text: 'Ping!') do |event|
       m = event.respond('Pong!')
       m.edit "Pong! Time taken: #{Time.now - event.timestamp} seconds."
@@ -78,7 +82,10 @@ class JoshTheBot
     end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:dragon, help_available: false) do |event|
-      
+      event.channel.send_embed do |embed|
+        embed.title = ":dragon: :dragon_face: :dragon:"
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: "https://memestatic.fjcdn.com/pictures/Random+dragon+appearance+trigger+small+stats+dragon+appearance+mentionlist+rpgadventures_bf7f59_6249941.jpg")
+      end
     end # DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:help, help_available: false) do |event|
@@ -95,6 +102,7 @@ class JoshTheBot
         embed.add_field(name: "~dragon", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "Magic Card Commands", value: "By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
         embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
+        embed.add_field(name: "secrets", value: "seeeeeeeecrets!")
         embed.description = "If you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky."
       end
       # @bot.send_message(event.channel.id, "Here's what I can do: \n!help: That's the command you used to get me to say this, it brings up the available commands! \nPing!: Saying this will make me say 'Pong!', plus how long it took me to respond! \nNOICE: ALSO NOICE \nMagic Card Commands: By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes: \n!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in) \nIf you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky.")
