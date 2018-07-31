@@ -61,9 +61,9 @@ class JoshTheBot
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
       end
-      # event.user.await(:punchline) do |punchline_event|
-      #   punchline_event.message.react("\u1f44f")
-      # end
+      event.user.await(:punchline) do |punchline_event|
+        punchline_event.message.react("\u{1f44f}")
+      end
     end
 
     @bot.message(contains: /\[\[.+\]\]/) do |event|
