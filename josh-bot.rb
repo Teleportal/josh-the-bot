@@ -60,9 +60,9 @@ class JoshTheBot
       event.respond("Who's there?")
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
-      end
-      event.user.await(:punchline) do |punchline_event|
-        punchline_event.message.react("\u{1f44f}")
+        event.user.await(:punchline) do |punchline_event|
+          punchline_event.message.react("\u{1f44f}")
+        end
       end
     end
 
