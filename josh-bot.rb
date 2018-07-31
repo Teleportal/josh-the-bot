@@ -67,6 +67,7 @@ class JoshTheBot
         else
           setup_event.message.react("\u{1f44f}")
           nil
+        end
       end
     end
 
