@@ -23,12 +23,12 @@ class JoshTheBot
 
     @scheduler.cron '0 0,12 * * *' do
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
-      m.react("\u1F95B")
-      m.react(💤)
+      m.react("\u{1F95B}")
+      m.react("💤")
     end
 
     @bot.message(with_text: "emoji test") do |event|
-      event.message.react("\u{1f49c}")
+      event.message.react("💤")
     end
 
     @bot.message(with_text: 'Ping!') do |event|
@@ -51,7 +51,7 @@ class JoshTheBot
     end
 
     @bot.message(contains: /[Ii] love you,? [Jj]osh-?[Bb]ot/) do |event|
-      event.message.react("\u1f49c")
+      event.message.react("\u{1f49c}")
       event.respond('I love you too!')
     end
 
