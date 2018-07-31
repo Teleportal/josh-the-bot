@@ -56,7 +56,7 @@ class JoshTheBot
       event.respond('I love you too!')
     end
 
-    @bot.message(with_text: /[Kk]nock,? [Kk]nock(.!)*/) do |event|
+    @bot.message(with_text: /[Kk]nock,? [Kk]nock[.!]*/) do |event|
       event.respond("Who's there?")
       event.user.await(:setup) do |setup_event|
         setup_event.respond("#{setup_event.message}, who?")
