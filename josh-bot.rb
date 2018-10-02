@@ -111,7 +111,7 @@ class JoshTheBot
         embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "~dragon", value: "THIS ISN'T DONE YET")
-        embed.add_field(name: "Magic Card Commands", value: "By putting the exact name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
+        embed.add_field(name: "Magic Card Commands", value: "By putting the name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
         embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
         embed.add_field(name: "secrets", value: "seeeeeeeecrets!")
         embed.description = "If you want to request any more commands or functions, please PM wordlessRage, or wordlessRage#5064 if you're feeling frisky."
