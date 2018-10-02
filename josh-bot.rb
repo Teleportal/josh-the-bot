@@ -23,9 +23,13 @@ class JoshTheBot
 
     @scheduler.cron '0 0,12 * * *' do
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
+      p "I sent the reminder!"
       m.react("\u{1F95B}")
+      p "I reacted the first time!"
       m.react("💤")
+      p "I reacted the second time!"
       m.react("💊")
+      p "I reacted the third and final time!"
     end
 
     @bot.message(with_text: "emoji test") do |event|
@@ -135,7 +139,7 @@ class JoshTheBot
     card = event.content.match(/\[\[.+\]\]/)
     card_name = card.to_s.split("[[")[1].split("]]")[0]
     stripped_name = ["!", "$", "#"].include?(card_name[0]) ? card_name[1..-1] : card_name
-    response = RestClient.get("https://api.scryfall.com/cards/named?exact=#{stripped_name}")
+    response = RestClient.get("https://api.scryfall.com/cards/named?fuzzy=#{stripped_name}")
     body = JSON.parse(response)
     get_map = {"$" => method(:get_card_price), "!" => method(:get_card_image), "#" => method(:get_card_legalities)}
     get_map.default = method(:get_card)
@@ -177,7 +181,11 @@ class JoshTheBot
     event.channel.send_embed do |embed|
       embed.title = get_title(event, body["name"], body["mana_cost"])
       embed.url = body["scryfall_uri"]
-      embed.description = get_card_text(event, body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
+      if !body["card_faces"]
+        embed.description = get_card_text(event, body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
+      else
+        embed.description = get_card_text(event, body["type_line"], (body["card_faces"]))
+      end
       embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["image_uris"]["normal"])
       embed.color = get_color(body["colors"])
     end
