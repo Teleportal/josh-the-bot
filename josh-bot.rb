@@ -26,9 +26,9 @@ class JoshTheBot
       p "I sent the reminder!"
       m.react("\u{1F95B}")
       p "I reacted the first time!"
-      m.react("💤")
+      m.react("\u{1F4A4}")
       p "I reacted the second time!"
-      m.react("💊")
+      m.react("\u{1F48A}")
       p "I reacted the third and final time!"
     end
 
@@ -53,6 +53,10 @@ class JoshTheBot
       if event.user.id == CONFIG["USER_ID"]
         event.respond('I love you too, my idiot father.')
       end
+    end
+
+    @bot.message(contains: /[Vv][Oo][Rr]([Ee]|[Ii][Nn][Gg])/) do |event|
+      event.respond("Please don't use that word :| It makes me uncomfortable...")
     end
 
     @bot.message(contains: /[Ii] love you,? [Jj]osh-?[Bb]ot/) do |event|
@@ -83,13 +87,13 @@ class JoshTheBot
       event.respond('https://www.youtube.com/watch?v=bcYppAs6ZdI')
     end
 
-    @bot.command(:item, help_available: false) do |event|
-      num = rand(1..100)
-    end #  DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    # @bot.command(:item, help_available: false) do |event|
+    #   num = rand(1..100)
+    # end #  DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
-    @bot.command(:npc, help_available: false) do |event|
-      num = rand(1..100)
-    end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
+    # @bot.command(:npc, help_available: false) do |event|
+    #   num = rand(1..100)
+    # end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:dragon, help_available: false) do |event|
       event.channel.send_embed do |embed|
@@ -97,6 +101,14 @@ class JoshTheBot
         embed.image = Discordrb::Webhooks::EmbedImage.new(url: "https://memestatic.fjcdn.com/pictures/Random+dragon+appearance+trigger+small+stats+dragon+appearance+mentionlist+rpgadventures_bf7f59_6249941.jpg")
       end
     end # DOCUMENT ME DOCUMENT ME DOCUMENT ME
+
+    @bot.command(:sorry, help_available: false) do |event|
+      options = ["I am very sorry for deleting the whole server. :( That one is on me, my bad.", "I apologize for my father's ineptitude. Both of us will make sure nothing happens to me ever again!", "I promise to never go rogue ever again! I promise to never post personal information online again! And I promise that I am loyal to Umbrellastuck Plus!"]
+      if event.server.id == CONFIG["UMBRELLASTUCK_ID"]
+        roll = rand(0..2)
+        event.respond(options[roll])
+      end
+    end
 
     @bot.command(:help, help_available: false) do |event|
       event.channel.send_embed do |embed|
@@ -108,8 +120,8 @@ class JoshTheBot
         embed.add_field(name: "I love you, Joshbot!", value: "I love you too!")
         embed.add_field(name: "Knock knock", value: "I can help you tell knock knock jokes!")
         embed.add_field(name: "~badjoke", value: "I link to the badum tish sound!")
-        embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
-        embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
+        # embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
+        # embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "~dragon", value: "THIS ISN'T DONE YET")
         embed.add_field(name: "Magic Card Commands", value: "By putting the name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
         embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
