@@ -165,7 +165,7 @@ class JoshTheBot
   def get_card_price(event, body)
     event.channel.send_embed do |embed|
       if body["card_faces"] # Check for multiface card
-        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
+        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " // " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
       else
         embed.title = get_title(event, body["name"], body["mana_cost"])
       end
@@ -180,14 +180,18 @@ class JoshTheBot
       else
         embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["card_faces"][0]["image_uris"]["normal"])
       end
-      embed.color = get_color(body["colors"])
+      if body["colors"]
+        embed.color = get_color(body["colors"])
+      else
+        embed.color = get_color(body["card_faces"][0]["colors"])
+      end
     end
   end
 
   def get_card_image(event, body)
     event.channel.send_embed do |embed|
       if body["card_faces"] # Check for multiface card
-        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
+        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " // " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
       else
         embed.title = get_title(event, body["name"], body["mana_cost"])
       end
@@ -197,14 +201,18 @@ class JoshTheBot
       else
         embed.image = Discordrb::Webhooks::EmbedImage.new(url: body["card_faces"][0]["image_uris"]["normal"])
       end
-      embed.color = get_color(body["colors"])
+      if body["colors"]
+        embed.color = get_color(body["colors"])
+      else
+        embed.color = get_color(body["card_faces"][0]["colors"])
+      end
     end
   end
 
   def get_card_legalities(event, body)
     event.channel.send_embed do |embed|
       if body["card_faces"] # Check for multiface card
-        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
+        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " // " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
       else
         embed.title = get_title(event, body["name"], body["mana_cost"])
       end
@@ -218,14 +226,18 @@ class JoshTheBot
       else
         embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["card_faces"][0]["image_uris"]["normal"])
       end
-      embed.color = get_color(body["colors"])
+      if body["colors"]
+        embed.color = get_color(body["colors"])
+      else
+        embed.color = get_color(body["card_faces"][0]["colors"])
+      end
     end
   end
 
   def get_card(event, body)
     event.channel.send_embed do |embed|
       if body["card_faces"] # Check for multiface card
-        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
+        embed.title = get_title(event, body["card_faces"][0]["name"], body["card_faces"][0]["mana_cost"]) + " // " + get_title(event, body["card_faces"][1]["name"], body["card_faces"][1]["mana_cost"])
       else
         embed.title = get_title(event, body["name"], body["mana_cost"])
       end
@@ -234,7 +246,7 @@ class JoshTheBot
         embed.description = get_card_text(event, body["type_line"], body["oracle_text"], body["power"], body["toughness"], body["loyalty"])
       else
         embed.description = get_card_text(event, body["card_faces"][0]["type_line"], body["card_faces"][0]["oracle_text"], body["card_faces"][0]["power"], body["card_faces"][0]["toughness"], body["card_faces"][0]["loyalty"])
-        embed.description += "\n"
+        embed.description += "\n//\n"
         embed.description += get_card_text(event, body["card_faces"][1]["type_line"], body["card_faces"][1]["oracle_text"], body["card_faces"][1]["power"], body["card_faces"][1]["toughness"], body["card_faces"][1]["loyalty"])
       end
       if body["image_uris"] # Check for multiface card
@@ -242,7 +254,11 @@ class JoshTheBot
       else
         embed.thumbnail = Discordrb::Webhooks::EmbedImage.new(url: body["card_faces"][0]["image_uris"]["normal"])
       end
-      embed.color = get_color(body["colors"])
+      if body["colors"]
+        embed.color = get_color(body["colors"])
+      else
+        embed.color = get_color(body["card_faces"][0]["colors"])
+      end
     end
   end
 
