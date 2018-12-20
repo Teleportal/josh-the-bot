@@ -33,7 +33,9 @@ class JoshTheBot
     end
 
     @bot.message(with_text: "emoji test") do |event|
-      event.message.react("💤")
+      event.message.react("\u{1F4A4}")
+      event.message.react("\u{1F95B}")
+      event.message.react("\u{1F48A}")
     end
 
     @bot.message(with_text: 'Ping!') do |event|
