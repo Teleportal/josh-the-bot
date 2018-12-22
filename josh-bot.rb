@@ -26,12 +26,16 @@ class JoshTheBot
       p "I sent the reminder!"
       sleep(1)
       m.react("\u{1F357}") #Eat
+      p "I reacted with the POULTRY LEG."
       sleep(1)
       m.react("\u{1F95B}") #Hydrate
+      p "I reacted with the MILK"
       sleep(1)
       m.react("\u{1F4A4}") #Sleep
+      p "I reacted with ZZZ"
       sleep(1)
       m.react("\u{1F48A}") #and Medicate
+      p "I reacted with the PILL"
       
     end
 
