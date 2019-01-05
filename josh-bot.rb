@@ -12,6 +12,8 @@ class JoshTheBot
     @colors = {"multi" => 14799002, "W" => 16579807, "U" => 9622767, "B" => 0, "R" => 16754056, "G" => 8772015}
     @colors.default = 13550272
 
+    @dragons = ["https://memestatic.fjcdn.com/pictures/Random+dragon+appearance+trigger+small+stats+dragon+appearance+mentionlist+rpgadventures_bf7f59_6249941.jpg", "https://i.imgur.com/nAPm9jR.jpg", "https://i.imgur.com/yrFcpWY.png", "https://i.imgur.com/eZDRmF2.png", "https://i.imgur.com/5qOSyN6.jpg", "https://i.imgur.com/xBmVOTf.png", "https://i.imgur.com/NBuEh3D.png", "https://i.imgur.com/sGW0SRc.png", "https://i.imgur.com/ea0NT7b.png", "https://i.imgur.com/02unSlc.png", "https://i.imgur.com/xARNioo.png", "https://i.imgur.com/NbkIj3b.png", "https://i.imgur.com/nD39EWK.png", "https://i.imgur.com/Mukg2fe.png", "https://i.imgur.com/4ytbebM.png", "https://i.imgur.com/xYAljBe.jpg", "https://i.imgur.com/Ej6AXqJ.png", "https://i.imgur.com/li3IB3Y.png", "https://i.imgur.com/vj3J85i.jpg", "https://i.imgur.com/NnnhimG.png", "https://i.imgur.com/5CvSxB4.png", "https://i.imgur.com/POSVazw.png", "https://i.imgur.com/yRaastL.png", "https://i.imgur.com/wGYvSV7.png", "https://i.imgur.com/jKqlwYr.png", "https://i.imgur.com/B6SupTV.png", "https://i.imgur.com/dW2HPsY.png", "https://i.imgur.com/PwZ70zX.png", "https://i.imgur.com/WTLGZrB.png", "https://i.imgur.com/GqOvCyL.png", "https://i.imgur.com/ImSwZHY.png", "https://i.imgur.com/HjFhoVf.png", "https://i.imgur.com/gMXyfaR.png", "https://i.imgur.com/29QCu99.png", "https://i.imgur.com/MdHzaVK.png", "https://i.imgur.com/M9KzykP.png", "https://i.imgur.com/U15QcN2.png", "https://i.imgur.com/c9JWmpV.png", "https://i.imgur.com/QcW08Vv.png", "https://i.imgur.com/icLpgC7.png"]
+
     @bot = Discordrb::Commands::CommandBot.new(
       log_mode: :normal,
       fancy_log: true,
@@ -29,13 +31,13 @@ class JoshTheBot
       p "I reacted with the POULTRY LEG."
       sleep(1)
       m.react("\u{1F95B}") #Hydrate
-      p "I reacted with the MILK"
+      p "I reacted with the MILK."
       sleep(1)
       m.react("\u{1F4A4}") #Sleep
-      p "I reacted with ZZZ"
+      p "I reacted with ZZZ."
       sleep(1)
       m.react("\u{1F48A}") #and Medicate
-      p "I reacted with the PILL"
+      p "I reacted with the PILL."
       
     end
 
@@ -111,9 +113,10 @@ class JoshTheBot
     # end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:dragon, help_available: false) do |event|
+      drag = rand(0..39)
       event.channel.send_embed do |embed|
         embed.title = ":dragon: :dragon_face: :dragon:"
-        embed.image = Discordrb::Webhooks::EmbedImage.new(url: "https://memestatic.fjcdn.com/pictures/Random+dragon+appearance+trigger+small+stats+dragon+appearance+mentionlist+rpgadventures_bf7f59_6249941.jpg")
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: @dragons[drag])
       end
     end # DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
