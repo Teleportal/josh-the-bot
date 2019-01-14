@@ -25,7 +25,7 @@ class JoshTheBot
 
     @scheduler.cron '0 0,12 * * *' do
       m = @bot.send_message(CONFIG["UMBRELLASTUCK_GENERAL_ID"], 'REMINDER: Eat, hydrate, sleep, and medicate!')
-      p "I sent the reminder!"
+      p "I SENT THE REMINDER!"
       sleep(1)
       m.react("\u{1F357}") #Eat
       p "I reacted with the POULTRY LEG."
@@ -39,6 +39,11 @@ class JoshTheBot
       m.react("\u{1F48A}") #and Medicate
       p "I reacted with the PILL."
       
+    end
+
+    @scheduler.cron '0 3 * * *' do
+      good = "G" + ("o" * rand(2..30)) + "d Morning Padsway!"
+      @bot.send_message(CONFIG["PADSWAY_GENERAL"], good)
     end
 
     @bot.message(with_text: "emoji test") do |event|
@@ -155,7 +160,7 @@ class JoshTheBot
 
     @bot.command(:exit, help_available: false) do |event|
       # This is a check that only allows a user with a specific ID to execute this command. Otherwise, everyone would be
-      # able to shut your bot down whenever they wanted.
+      # able to shut the bot down whenever they wanted.
       break unless event.user.id == CONFIG["USER_ID"]
       @bot.send_message(event.channel.id, 'Bot is shutting down')
       exit
