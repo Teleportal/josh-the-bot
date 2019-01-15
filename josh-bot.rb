@@ -41,7 +41,7 @@ class JoshTheBot
       
     end
 
-    @scheduler.cron '0 3 * * *' do
+    @scheduler.cron '0 15 * * *' do
       good = "G" + ("o" * rand(2..30)) + "d Morning Padsway!"
       @bot.send_message(CONFIG["PADSWAY_GENERAL"], good)
     end
