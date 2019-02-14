@@ -77,7 +77,7 @@ class JoshTheBot
       end
     end
 
-    @bot.message(contains: /[Vv][Oo][Rr]([Ee]|[Ii][Nn][Gg])/) do |event|
+    @bot.message(contains: /\b[Vv][Oo][Rr]([Ee]|[Ii][Nn][Gg])\b/) do |event|
       event.respond("Please don't use that word. You know the one.")
     end
 
