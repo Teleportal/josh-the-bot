@@ -128,6 +128,15 @@ class JoshTheBot
       end
     end # DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
+    @bot.command(:astro, help_available: false) do |event|
+      response = RestClient.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+      body = JSON.parse(respone)
+      event.channel.send_embed do |embed|
+        embed.title = ":telescope: :stars: :sunny: :full_moon: :comet: :telescope:"
+        embed.image = Discordrb::Webhooks::EmbedImage.new(url: body["hdurl"])
+      end
+    end
+
     @bot.command(:fuck, help_available: false) do |event|
       event.respond('Fuck!')
     end
@@ -187,8 +196,8 @@ class JoshTheBot
     stripped_name = ["!", "$", "#"].include?(card_name[0]) ? card_name[1..-1] : card_name
     response = RestClient.get("https://api.scryfall.com/cards/named?fuzzy=#{stripped_name}")
     body = JSON.parse(response)
-    get_map = {"$" => method(:get_card_price), "!" => method(:get_card_image), "#" => method(:get_card_legalities)}
-    get_map.default = method(:get_card)
+    get_map = {"$" => method(:get_card_price), "!" => method(:get_card), "#" => method(:get_card_legalities)}
+    get_map.default = method(:get_card_image)
     get_map[card_name[0]].(event, body)
   end
 
