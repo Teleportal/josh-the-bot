@@ -130,7 +130,7 @@ class JoshTheBot
 
     @bot.command(:astro, help_available: false) do |event|
       response = RestClient.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
-      body = JSON.parse(respone)
+      body = JSON.parse(response)
       event.channel.send_embed do |embed|
         embed.title = ":telescope: :stars: :sunny: :full_moon: :comet: :telescope:"
         embed.image = Discordrb::Webhooks::EmbedImage.new(url: body["hdurl"])
