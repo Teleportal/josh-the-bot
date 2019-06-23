@@ -129,6 +129,10 @@ class JoshTheBot
       event.respond('Fuck!')
     end
 
+    @bot.command(:alarm, help_available: false) do |event|
+      event.respond('https://www.youtube.com/watch?v=cOy6hqzfsAs')
+    end
+
     @bot.command(:sorry, help_available: false) do |event|
       options = ["I am very sorry for deleting the whole server. :( That one is on me, my bad.", "I apologize for my father's ineptitude. Both of us will make sure nothing happens to me ever again!", "I promise to never go rogue ever again! I promise to never post personal information online again! And I promise that I am loyal to Umbrellastuck Plus!"]
       if event.server.id == CONFIG["UMBRELLASTUCK_ID"]
