@@ -48,14 +48,17 @@ class JoshTheBot
 
     @bot.message(with_text: "emoji test") do |event|
       m = event.respond("Test message")
-      sleep(1)
       m.react("\u{1F4A4}")
-      sleep(1)
       m.react("\u{1F95B}")
-      sleep(1)
       m.react("\u{1F357}")
-      sleep(1)
       m.react("\u{1F48A}")
+    end
+
+    @bot.message(from: 'josh-the-bot#0780', with_text: 'REMINDER: Eat, hydrate, sleep, and medicate!') do |event|
+      #event.message.react("\u{1F357}")
+      event.message.react("\u{1F95B}")
+      event.message.react("\u{1F4A4}")
+      event.message.react("\u{1F48A}")
     end
 
     @bot.message(with_text: 'Ping!') do |event|
