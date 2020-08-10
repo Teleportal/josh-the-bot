@@ -1,3 +1,4 @@
 test.rb
 .DS_Store
 config.yaml
+# remember to remove files from the git repository itself before updating this file!

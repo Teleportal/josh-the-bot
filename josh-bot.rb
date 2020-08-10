@@ -169,6 +169,12 @@ class JoshTheBot
 
     end
 
+    @bot.command(:dinner, help_available: false) do |event|
+      options = ["American", "Hamburgers", "Mexican", "Breakfast", "Italian", "Chinese", "Thai", "Japanese", "Indian", "Mediteranean", "Pizza", "BBQ", "Sandwiches", "Seafood", "Salads"]
+      choice = options[rand(0..15)]
+      "You're eating `#{choice}` tonight!"
+    end
+
     # @bot.command(:sorry, help_available: false) do |event|
     #   options = ["I am very sorry for deleting the whole server. :( That one is on me, my bad.", "I apologize for my father's ineptitude. Both of us will make sure nothing happens to me ever again!", "I promise to never go rogue ever again! I promise to never post personal information online again! And I promise that I am loyal to Umbrellastuck Plus!"]
     #   if event.server.id == CONFIG["UMBRELLASTUCK_ID"]
@@ -189,7 +195,9 @@ class JoshTheBot
         embed.add_field(name: "~badjoke", value: "I link to the badum tish sound!")
         # embed.add_field(name: "~item", value: "THIS ISN'T DONE YET")
         # embed.add_field(name: "~npc", value: "THIS ISN'T DONE YET")
-        embed.add_field(name: "~dragon", value: "THIS ISN'T DONE YET")
+        embed.add_field(name: "~dragon", value: "Receive a random dragon hoard from tumblr user Iguanamouth.")
+        embed.add_field(name: "~roll", value: "Roll X dice of Y sides in the form: XdY.")
+        embed.add_field(name: "~dinner", value: "Spin the wheel of dinner and have decisions made for you!")
         # embed.add_field(name: "Magic Card Commands", value: "By putting the name of a magic card inside of double brackets like [[this]], I can pull up the text of that card for you! I have some prefixes for more specific information, such as putting ! in front of the card name (but still in the double brackets) will just pull up the card image. Here's a list of those prefixes:")
         # embed.add_field(name: "Prefixes", value: "!: Card image\n$: Current card price\n#: Card legalities (what formats the card is legal in)")
         embed.add_field(name: "secrets", value: "seeeeeeeecrets!")
