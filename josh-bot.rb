@@ -42,7 +42,7 @@ class JoshTheBot
     end
 
     @scheduler.cron '0 15 * * *' do
-      good = "G" + ("o" * rand(2..30)) + "d Morning Padsway!"
+      good = "G" + ("o" * rand(2..40)) + "d Morning Padsway!"
       @bot.send_message(CONFIG["PADSWAY_GENERAL"], good)
     end
 
@@ -121,7 +121,7 @@ class JoshTheBot
     # end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:dragon, help_available: false) do |event|
-      drag = rand(0..67)
+      drag = rand(0..66)
       event.channel.send_embed do |embed|
         embed.title = ":dragon: :dragon_face: :dragon:"
         embed.image = Discordrb::Webhooks::EmbedImage.new(url: @dragons[drag])
@@ -171,8 +171,8 @@ class JoshTheBot
 
     @bot.command(:dinner, help_available: false) do |event|
       options = ["American", "Hamburgers", "Mexican", "Breakfast", "Italian", "Chinese", "Thai", "Japanese", "Indian", "Mediteranean", "Pizza", "BBQ", "Sandwiches", "Seafood", "Salads"]
-      choice = options[rand(0..15)]
-      "You're eating `#{choice}` tonight!"
+      choice = options[rand(0..14)]
+      "You're eating #{choice} tonight!"
     end
 
     # @bot.command(:sorry, help_available: false) do |event|
