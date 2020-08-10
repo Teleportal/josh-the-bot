@@ -145,6 +145,30 @@ class JoshTheBot
       event.respond('https://www.youtube.com/watch?v=cOy6hqzfsAs')
     end
 
+    @bot.command(:roll, help_available: false) do |event, dice|
+      # Parse the input
+      number, sides = dice.split('d')
+
+      # Check for valid input; make sure we got both numbers
+      next 'Invalid syntax.. try: `roll 2d10`' unless number && sides
+
+      # Check for valid input; make sure we actually got numbers and not words
+      begin
+        number = Integer(number, 10)
+        sides  = Integer(sides, 10)
+      rescue ArgumentError
+        next 'You must pass two *numbers*.. try: `roll 2d10`'
+      end
+
+      # Time to roll the dice!
+      rolls = Array.new(number) { rand(1..sides) }
+      sum = rolls.reduce(:+)
+
+      # Return the result
+      "You rolled: `#{rolls}`, total: `#{sum}`"
+
+    end
+
     # @bot.command(:sorry, help_available: false) do |event|
     #   options = ["I am very sorry for deleting the whole server. :( That one is on me, my bad.", "I apologize for my father's ineptitude. Both of us will make sure nothing happens to me ever again!", "I promise to never go rogue ever again! I promise to never post personal information online again! And I promise that I am loyal to Umbrellastuck Plus!"]
     #   if event.server.id == CONFIG["UMBRELLASTUCK_ID"]
