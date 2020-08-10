@@ -121,7 +121,7 @@ class JoshTheBot
     # end # DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME DOCUMENT ME
 
     @bot.command(:dragon, help_available: false) do |event|
-      drag = rand(0..66)
+      drag = rand(0..67)
       event.channel.send_embed do |embed|
         embed.title = ":dragon: :dragon_face: :dragon:"
         embed.image = Discordrb::Webhooks::EmbedImage.new(url: @dragons[drag])

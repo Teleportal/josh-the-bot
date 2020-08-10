@@ -10,3 +10,4 @@ Make sure you `bundle` in your terminal inside of the directory for your bot bef
 This bot is built using the ruby gem [discordrb](https://github.com/meew0/discordrb), where you can find a lot of information about setting up your own bot and building new functionality into it!
 
 And a lot of the features of this bot are modeled on those in the [Scryfall Discord bot](https://scryfall.com/bots), though I lovingly ripped off some code from their original version which is both written in javascript (mine is in ruby, so some translation work was involved) and can be found [here](https://github.com/scryfall/servo).
+EDIT: As of 2020, we're all willing to admit that the scryfall bot can and should just be doing this on its own. I've retained the ruby code that I translated from the scryfall bot, but I've commented it out so that josh-bot has to do less.
